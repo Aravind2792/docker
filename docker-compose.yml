@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  dash:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "80:8080"
+    volumes:
+      #- /apps # directory inside the container which should not be disturbed 
+      - .:/apps #all contents of local current directory to apps folder of the container    
+    command: python app.py
+  
+
+       
+

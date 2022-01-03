@@ -1,0 +1,30 @@
+# Pull base image
+FROM python:3.7-slim
+
+RUN apt-get update \
+    && apt-get install -yyq netcat
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+#creating a working directory
+RUN mkdir /apps
+
+ENV FLASK_RUN_HOST=0.0.0.0  
+
+
+# changing the default working of the container
+WORKDIR /apps
+
+# copy the requirements file to the working directory
+# working directory of your machine to working directory of Docker
+COPY ./requirements.txt ./ 
+
+# Install some depenendencies
+RUN pip install -r requirements.txt
+
+# copy the dependencies file to the working directory
+COPY ./ ./ 
+# Default command
+#CMD ["python", "./app.py"]
+
